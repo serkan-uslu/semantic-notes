@@ -7,7 +7,6 @@ import { settingsRepository } from '../repositories/settingsRepository.js'
 import { ollamaService } from '../ai/ollamaService.js'
 import { vectorService } from '../vector/vectorService.js'
 import type { Block } from '@semantic-notes/shared'
-import { CHUNK_SIZE_TOKENS } from '@semantic-notes/shared'
 
 // ─── Text Extraction ──────────────────────────────────────────────────────────
 

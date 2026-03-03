@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm'
 import { nanoid } from 'nanoid'
 import { db } from '../db/index.js'
-import { agents } from '../db/schema.js'
+import { agents, agent_runs, agent_tool_calls } from '../db/schema.js'
 import type {
   Agent,
   CreateAgentInput,
@@ -86,7 +86,15 @@ export const agentRepository = {
   },
 
   delete(id: string): void {
-    db.delete(agents).where(eq(agents.id, id)).run()
+    // Cascade: tool calls → runs → agent
+    db.transaction(() => {
+      const runs = db.select({ id: agent_runs.id }).from(agent_runs).where(eq(agent_runs.agent_id, id)).all()
+      for (const run of runs) {
+        db.delete(agent_tool_calls).where(eq(agent_tool_calls.run_id, run.id)).run()
+      }
+      db.delete(agent_runs).where(eq(agent_runs.agent_id, id)).run()
+      db.delete(agents).where(eq(agents.id, id)).run()
+    })
   },
 }
 

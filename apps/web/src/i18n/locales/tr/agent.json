@@ -2,7 +2,11 @@
   "panel": {
     "title": "Ajanlar",
     "empty": "Henüz ajan yok",
-    "create": "Ajan oluştur"
+    "create": "Ajan oluştur",
+    "deleteTitle": "Ajanı sil",
+    "deleteDescription": "Bu işlem ajanı ve tüm çalıştırma geçmişini kalıcı olarak siler.",
+    "deleteConfirm": "Sil",
+    "deleteCancel": "İptal"
   },
   "run": {
     "start": "Çalıştır",

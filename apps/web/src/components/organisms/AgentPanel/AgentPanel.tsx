@@ -10,7 +10,7 @@ import type { Agent } from '@semantic-notes/shared'
 
 export function AgentPanel() {
   const { t } = useTranslation('agent')
-  const { agents, isLoading } = useAgentList()
+  const { agents, isLoading, remove } = useAgentList()
   const [dialogAgent, setDialogAgent] = useState<Agent | null | undefined>(undefined)
 
   const openCreate = () => setDialogAgent(null)
@@ -38,7 +38,7 @@ export function AgentPanel() {
           <p className="text-xs text-text-tertiary text-center py-4">{t('panel.empty')}</p>
         ) : (
           agents.map((agent: Agent) => (
-            <AgentCard key={agent.id} agent={agent} onEdit={openEdit} />
+            <AgentCard key={agent.id} agent={agent} onEdit={openEdit} onDelete={remove} />
           ))
         )}
       </div>

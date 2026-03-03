@@ -2,7 +2,11 @@
   "panel": {
     "title": "Agents",
     "empty": "No agents yet",
-    "create": "Create agent"
+    "create": "Create agent",
+    "deleteTitle": "Delete agent",
+    "deleteDescription": "This will permanently delete the agent and all its run history.",
+    "deleteConfirm": "Delete",
+    "deleteCancel": "Cancel"
   },
   "run": {
     "start": "Run",
