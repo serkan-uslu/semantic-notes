@@ -9,9 +9,8 @@ build
 packages/shared/dist
 
 # Database & local data
-data/*.db
-data/*.db-shm
-data/*.db-wal
+data/
+chroma/
 
 # Environment
 .env

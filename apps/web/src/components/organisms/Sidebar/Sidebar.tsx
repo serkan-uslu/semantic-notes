@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { Plus, Settings, Bot } from 'lucide-react'
+import { Plus, Settings, Bot, Info } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils.js'
 import { useNoteStore } from '@/stores/noteStore.js'
@@ -94,6 +94,17 @@ export function Sidebar() {
         >
           <Settings size={14} />
           {t('nav.settings')}
+        </button>
+        <button
+          onClick={() => setActiveNote('__about__')}
+          className={cn(
+            'flex items-center gap-2 w-full h-7 px-2 rounded-sm text-sm',
+            'text-text-secondary hover:bg-bg-hover hover:text-text-primary',
+            'transition-colors duration-fast'
+          )}
+        >
+          <Info size={14} />
+          {t('nav.about')}
         </button>
       </div>
     </aside>

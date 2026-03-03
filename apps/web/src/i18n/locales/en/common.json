@@ -28,7 +28,8 @@
     "trash": "Trash",
     "settings": "Settings",
     "search": "Search",
-    "agents": "Agents"
+    "agents": "Agents",
+    "about": "About"
   },
   "notifications": {
     "agentDone": "{{agentName}} completed",

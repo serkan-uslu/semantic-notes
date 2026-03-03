@@ -15,6 +15,70 @@ function now() {
   return new Date().toISOString()
 }
 
+/**
+ * Extract plain text from BlockNote blocks for FTS indexing.
+ * Handles native BlockNote format, legacy wrapped format, and agent-created blocks.
+ */
+function blocksToPlainText(noteBlocks: Block[]): string {
+  return noteBlocks
+    .map((b) => {
+      if (!b.content) return ''
+      if (typeof b.content === 'string') return b.content
+      if (Array.isArray(b.content)) {
+        return (b.content as { text?: string }[]).map((c) => c.text ?? '').join(' ')
+      }
+      // Legacy: content field holds a BlockNote block { id, type, content: [...] }
+      if (typeof b.content === 'object') {
+        const inner = (b.content as Record<string, unknown>).content
+        if (Array.isArray(inner)) {
+          return (inner as { text?: string }[]).map((c) => c.text ?? '').join(' ')
+        }
+      }
+      return ''
+    })
+    .filter(Boolean)
+    .join(' ')
+}
+
+/**
+ * Upsert a note into the FTS5 index (delete by rowid + re-insert).
+ * Uses rowid-based delete which is required for proper FTS5 virtual table updates.
+ * Silently swallows errors so a failing FTS update never breaks note saves.
+ */
+function syncFts(noteId: string, title: string, noteBlocks: Block[]): void {
+  try {
+    const contentText = blocksToPlainText(noteBlocks)
+    // Delete existing row for this note via rowid (FTS5 requires rowid-based delete)
+    const existing = db.get<{ rowid: number }>(
+      sql`SELECT rowid FROM notes_fts WHERE id = ${noteId} LIMIT 1`
+    )
+    if (existing) {
+      db.run(sql`DELETE FROM notes_fts WHERE rowid = ${existing.rowid}`)
+    }
+    db.run(
+      sql`INSERT INTO notes_fts(id, title, content) VALUES (${noteId}, ${title}, ${contentText})`
+    )
+  } catch (err) {
+    console.error('[FTS] syncFts failed for note', noteId, err)
+  }
+}
+
+/**
+ * Remove a note from the FTS5 index.
+ */
+function removeFts(noteId: string): void {
+  try {
+    const existing = db.get<{ rowid: number }>(
+      sql`SELECT rowid FROM notes_fts WHERE id = ${noteId} LIMIT 1`
+    )
+    if (existing) {
+      db.run(sql`DELETE FROM notes_fts WHERE rowid = ${existing.rowid}`)
+    }
+  } catch (err) {
+    console.error('[FTS] removeFts failed for note', noteId, err)
+  }
+}
+
 function parseBlocks(raw: typeof blocks.$inferSelect[]): Block[] {
   return raw
     .sort((a, b) => a.order_index - b.order_index)
@@ -115,6 +179,9 @@ export const noteRepository = {
       })
       .run()
 
+    // Sync FTS — newly created note has no blocks yet
+    syncFts(id, input.title ?? '', [])
+
     return noteRepository.findById(id)!
   },
 
@@ -142,6 +209,10 @@ export const noteRepository = {
     if (input.blocks !== undefined) {
       noteRepository.replaceBlocks(id, input.blocks)
     }
+
+    // Keep FTS index in sync
+    const updated = noteRepository.findWithBlocks(id)
+    if (updated) syncFts(id, updated.title, updated.blocks)
 
     return noteRepository.findById(id)!
   },
@@ -214,6 +285,7 @@ export const noteRepository = {
       .set({ is_archived: true, updated_at: now() })
       .where(eq(notes.id, id))
       .run()
+    removeFts(id)
   },
 
   /**
@@ -224,6 +296,8 @@ export const noteRepository = {
       .set({ is_archived: false, updated_at: now() })
       .where(eq(notes.id, id))
       .run()
+    const note = noteRepository.findWithBlocks(id)
+    if (note) syncFts(id, note.title, note.blocks)
   },
 
   /**
@@ -231,6 +305,38 @@ export const noteRepository = {
    */
   deleteForever(id: string): void {
     db.delete(notes).where(and(eq(notes.id, id), eq(notes.is_archived, true))).run()
+    removeFts(id)
+  },
+
+  /**
+   * Rebuild the entire FTS5 index from scratch.
+   * Call once on startup or via the /api/search/rebuild-fts endpoint.
+   */
+  rebuildAllFts(): number {
+    // Truncate existing FTS data — use rowid range to clear all rows in a regular FTS5 table
+    try {
+      db.run(sql`DELETE FROM notes_fts WHERE rowid >= 0`)
+    } catch { /* ignore if empty */ }
+
+    const allNotes = db
+      .select()
+      .from(notes)
+      .where(eq(notes.is_archived, false))
+      .all()
+
+    for (const note of allNotes) {
+      const rawBlocks = db
+        .select()
+        .from(blocks)
+        .where(eq(blocks.note_id, note.id))
+        .orderBy(blocks.order_index)
+        .all()
+      const parsedBlocks = parseBlocks(rawBlocks)
+      syncFts(note.id, note.title, parsedBlocks)
+    }
+
+    console.log(`[FTS] Rebuilt index for ${allNotes.length} notes`)
+    return allNotes.length
   },
 
   /**
@@ -247,12 +353,15 @@ export const noteRepository = {
    * Full-text search (SQLite FTS5)
    */
   searchFullText(query: string, limit = 10): (Note & { snippet: string })[] {
+    // Escape special FTS5 characters to avoid query syntax errors
+    const safeQuery = query.replace(/["\-*():,{}\[\]]/g, ' ').trim()
+    if (!safeQuery) return []
     const rows = db.all<Note & { snippet: string }>(
       sql`
-        SELECT n.*, snippet(notes_fts, 1, '<mark>', '</mark>', '...', 20) AS snippet
+        SELECT n.*, snippet(notes_fts, 2, '<mark>', '</mark>', '...', 20) AS snippet
         FROM notes_fts
         JOIN notes n ON notes_fts.id = n.id
-        WHERE notes_fts MATCH ${query + '*'}
+        WHERE notes_fts MATCH ${safeQuery + '*'}
           AND n.is_archived = 0
         ORDER BY rank
         LIMIT ${limit}

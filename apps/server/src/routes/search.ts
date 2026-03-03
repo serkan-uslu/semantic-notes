@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { embeddingService } from '~/ai/embeddingService.js'
 import { hybridSearch } from '~/services/searchService.js'
+import { noteRepository } from '~/repositories/noteRepository.js'
 
 export const searchRouter = Router()
 
@@ -23,4 +24,10 @@ searchRouter.post('/embed/:noteId', async (req, res) => {
   const { noteId } = req.params
   embeddingService.embedNote(noteId).catch(console.error)
   return res.json({ ok: true, data: { queued: true } })
+})
+
+// POST /api/search/rebuild-fts — rebuild full-text search index from scratch
+searchRouter.post('/rebuild-fts', (_req, res) => {
+  const count = noteRepository.rebuildAllFts()
+  return res.json({ ok: true, data: { indexed: count } })
 })

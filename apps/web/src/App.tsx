@@ -10,8 +10,10 @@ import { SearchOverlay } from '@/components/organisms/SearchOverlay/SearchOverla
 import { NotePage } from '@/components/pages/NotePage/NotePage.js'
 import { EmptyState } from '@/components/pages/EmptyState/EmptyState.js'
 import { SettingsPage } from '@/components/pages/SettingsPage/SettingsPage.js'
+import { AboutPage } from '@/components/pages/AboutPage/AboutPage.js'
 
 const SETTINGS_NOTE_ID = '__settings__'
+const ABOUT_NOTE_ID = '__about__'
 
 export default function App() {
   const { theme } = useUIStore()
@@ -37,6 +39,7 @@ export default function App() {
   // Decide which main content to render
   function renderContent() {
     if (activeNoteId === SETTINGS_NOTE_ID) return <SettingsPage />
+    if (activeNoteId === ABOUT_NOTE_ID) return <AboutPage />
     if (activeNoteId) return <NotePage />
     return <EmptyState />
   }

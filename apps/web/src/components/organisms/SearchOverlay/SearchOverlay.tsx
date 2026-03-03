@@ -3,29 +3,60 @@ import { Search, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useUIStore } from '@/stores/uiStore.js'
 import { useNoteStore } from '@/stores/noteStore.js'
-import { useSemantic } from '@/hooks/useSemantic.js'
+import { searchService } from '@/services/searchService.js'
 import { Badge } from '@/components/atoms/Badge/Badge.js'
 import { Spinner } from '@/components/atoms/Spinner/Spinner.js'
 import { cn } from '@/lib/utils.js'
+import type { SearchResult } from '@semantic-notes/shared'
 
 export function SearchOverlay() {
   const { t } = useTranslation('common')
   const { searchOpen, setSearchOpen } = useUIStore()
   const { setActiveNote } = useNoteStore()
-  const { results, isSearching, debouncedSearch, clear } = useSemantic()
+
   const [inputValue, setInputValue] = useState('')
+  const [results, setResults] = useState<SearchResult[]>([])
+  const [isSearching, setIsSearching] = useState(false)
   const [selected, setSelected] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
 
+  /* ── Debounced search via useEffect ─────────────────────────── */
+  useEffect(() => {
+    if (!inputValue.trim()) {
+      setResults([])
+      setIsSearching(false)
+      return
+    }
+
+    setIsSearching(true)
+    const timer = setTimeout(() => {
+      console.log('[SearchOverlay] fetching:', inputValue)
+      searchService
+        .search({ query: inputValue, mode: 'hybrid', limit: 15 })
+        .then((data) => {
+          console.log('[SearchOverlay] results:', data.length, data)
+          setResults(data)
+        })
+        .catch((err) => {
+          console.error('[SearchOverlay] search error:', err)
+          setResults([])
+        })
+        .finally(() => setIsSearching(false))
+    }, 300)
+
+    return () => clearTimeout(timer)
+  }, [inputValue])
+
+  /* ── Reset on open / close ──────────────────────────────────── */
   useEffect(() => {
     if (searchOpen) {
       setTimeout(() => inputRef.current?.focus(), 50)
       setSelected(0)
     } else {
       setInputValue('')
-      clear()
+      setResults([])
+      setIsSearching(false)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchOpen])
 
   useEffect(() => {
@@ -39,11 +70,6 @@ export function SearchOverlay() {
   function pick(noteId: string) {
     setActiveNote(noteId)
     close()
-  }
-
-  function handleChange(value: string) {
-    setInputValue(value)
-    debouncedSearch(value)
   }
 
   function handleKey(e: React.KeyboardEvent) {
@@ -78,13 +104,13 @@ export function SearchOverlay() {
           <input
             ref={inputRef}
             value={inputValue}
-            onChange={(e) => handleChange(e.target.value)}
+            onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKey}
             placeholder={t('search.placeholder')}
             className="flex-1 h-12 bg-transparent text-sm text-text-primary placeholder:text-text-tertiary outline-none"
           />
           {inputValue && (
-            <button onClick={() => handleChange('')} className="text-text-tertiary hover:text-text-secondary">
+            <button onClick={() => setInputValue('')} className="text-text-tertiary hover:text-text-secondary">
               <X size={14} />
             </button>
           )}

@@ -107,7 +107,16 @@ export function BlockEditor({ noteId, isWide = false }: BlockEditorProps) {
     if (note.blocks && note.blocks.length > 0) {
       const bnBlocks = toBlocknoteBlocks(note.blocks)
       if (bnBlocks.length > 0) {
-        editor.replaceBlocks(editor.document, bnBlocks as Parameters<typeof editor.replaceBlocks>[1])
+        try {
+          editor.replaceBlocks(editor.document, bnBlocks as Parameters<typeof editor.replaceBlocks>[1])
+        } catch {
+          // Editor not yet ready (TipTap dispatch undefined); retry after mount
+          setTimeout(() => {
+            try {
+              editor.replaceBlocks(editor.document, bnBlocks as Parameters<typeof editor.replaceBlocks>[1])
+            } catch {/* ignore */}
+          }, 0)
+        }
       }
     }
   }, [note, editor])

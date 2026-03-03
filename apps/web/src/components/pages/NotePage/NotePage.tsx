@@ -22,7 +22,7 @@ export function NotePage() {
         </button>
       </div>
 
-      <BlockEditor noteId={activeNoteId} isWide={isWide} />
+      <BlockEditor key={activeNoteId} noteId={activeNoteId} isWide={isWide} />
     </div>
   )
 }

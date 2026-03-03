@@ -7,10 +7,13 @@ import { searchRouter } from '~/routes/search.js'
 import { settingsRouter } from '~/routes/settings.js'
 import { statusRouter } from '~/routes/status.js'
 import { runMigrations } from '~/db/index.js'
+import { noteRepository } from '~/repositories/noteRepository.js'
 
-// ─── Bootstrap ────────────────────────────────────────────────────────────────
+// ─── Bootstrap ──────────────────────────────────────────────────────────────────
 
 runMigrations()
+// Backfill FTS index (safe to run every startup — fast, idempotent)
+noteRepository.rebuildAllFts()
 
 const app = express()
 const PORT = Number(process.env.PORT ?? 3001)

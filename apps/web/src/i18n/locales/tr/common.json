@@ -28,7 +28,8 @@
     "trash": "Çöp kutusu",
     "settings": "Ayarlar",
     "search": "Ara",
-    "agents": "Ajanlar"
+    "agents": "Ajanlar",
+    "about": "Hakkında"
   },
   "notifications": {
     "agentDone": "{{agentName}} tamamlandı",

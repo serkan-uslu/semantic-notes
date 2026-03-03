@@ -2,6 +2,7 @@ import { ChromaClient, Collection } from 'chromadb'
 
 // ─── ChromaDB Client ──────────────────────────────────────────────────────────
 
+const CHROMA_URL = 'http://localhost:8000'
 const COLLECTION_NAME = 'semantic_notes'
 
 let client: ChromaClient | null = null
@@ -9,7 +10,8 @@ let collection: Collection | null = null
 
 async function getCollection(): Promise<Collection> {
   if (!client) {
-    client = new ChromaClient({ path: 'http://localhost:8000' })
+    client = new ChromaClient({ path: CHROMA_URL })
+    collection = null // reset when client is recreated
   }
   if (!collection) {
     collection = await client.getOrCreateCollection({
@@ -24,15 +26,13 @@ async function getCollection(): Promise<Collection> {
 
 export const vectorService = {
   /**
-   * Check if ChromaDB is reachable
+   * Check if ChromaDB is reachable via direct HTTP heartbeat.
+   * Uses /api/v2/heartbeat to avoid chromadb JS client version incompatibilities.
    */
   async isOnline(): Promise<boolean> {
     try {
-      if (!client) {
-        client = new ChromaClient({ path: 'http://localhost:8000' })
-      }
-      await client.listCollections()
-      return true
+      const res = await fetch(`${CHROMA_URL}/api/v2/heartbeat`)
+      return res.ok
     } catch {
       return false
     }
