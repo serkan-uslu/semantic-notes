@@ -1,12 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
-import { notesRouter } from './routes/notes.js'
-import { agentsRouter } from './routes/agents.js'
-import { searchRouter } from './routes/search.js'
-import { settingsRouter } from './routes/settings.js'
-import { statusRouter } from './routes/status.js'
-import { runMigrations } from './db/index.js'
+import { notesRouter } from '~/routes/notes.js'
+import { agentsRouter } from '~/routes/agents.js'
+import { searchRouter } from '~/routes/search.js'
+import { settingsRouter } from '~/routes/settings.js'
+import { statusRouter } from '~/routes/status.js'
+import { runMigrations } from '~/db/index.js'
 
 // ─── Bootstrap ────────────────────────────────────────────────────────────────
 

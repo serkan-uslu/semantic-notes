@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Bot, Plus } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Button } from '../../atoms/Button/Button.js'
-import { Spinner } from '../../atoms/Spinner/Spinner.js'
-import { AgentCard } from '../../molecules/AgentCard/AgentCard.js'
-import { AgentFormDialog } from '../AgentFormDialog/AgentFormDialog.js'
-import { useAgentList } from '../../../hooks/useAgentList.js'
+import { Button } from '@/components/atoms/Button/Button.js'
+import { Spinner } from '@/components/atoms/Spinner/Spinner.js'
+import { AgentCard } from '@/components/molecules/AgentCard/AgentCard.js'
+import { AgentFormDialog } from '@/components/organisms/AgentFormDialog/AgentFormDialog.js'
+import { useAgentList } from '@/hooks/useAgentList.js'
 import type { Agent } from '@semantic-notes/shared'
 
 export function AgentPanel() {

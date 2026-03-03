@@ -1,7 +1,7 @@
 import { eq, and, isNull, desc, sql } from 'drizzle-orm'
 import { nanoid } from 'nanoid'
-import { db } from '../db/index.js'
-import { notes, blocks } from '../db/schema.js'
+import { db } from '~/db/index.js'
+import { notes, blocks } from '~/db/schema.js'
 import type {
   Note,
   CreateNoteInput,

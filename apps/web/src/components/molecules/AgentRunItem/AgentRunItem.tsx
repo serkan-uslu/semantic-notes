@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChevronDown, ChevronRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { StatusBadge } from '../StatusBadge/StatusBadge.js'
+import { StatusBadge } from '@/components/molecules/StatusBadge/StatusBadge.js'
 import type { AgentRun } from '@semantic-notes/shared'
 
 // ─── AgentRunItem ─────────────────────────────────────────────────────────────

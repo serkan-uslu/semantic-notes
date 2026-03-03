@@ -6,7 +6,7 @@ import type {
   UpdateAgentInput,
   RunAgentInput,
 } from '@semantic-notes/shared'
-import { apiFetch } from '../lib/apiClient'
+import { apiFetch } from '@/lib/apiClient'
 
 // ─── Agent Service ────────────────────────────────────────────────────────────
 

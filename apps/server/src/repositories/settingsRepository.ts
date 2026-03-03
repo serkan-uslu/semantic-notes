@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm'
-import { db } from '../db/index.js'
-import { settings } from '../db/schema.js'
+import { db } from '~/db/index.js'
+import { settings } from '~/db/schema.js'
 import type { AppSettings, UpdateSettingsInput } from '@semantic-notes/shared'
 import { AppSettingsSchema } from '@semantic-notes/shared'
 

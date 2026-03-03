@@ -3,16 +3,16 @@ import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
 // ─── English ──────────────────────────────────────────────────────────────────
-import enCommon from './locales/en/common.json'
-import enEditor from './locales/en/editor.json'
-import enAgent from './locales/en/agent.json'
-import enSettings from './locales/en/settings.json'
+import enCommon from '@/i18n/locales/en/common.json'
+import enEditor from '@/i18n/locales/en/editor.json'
+import enAgent from '@/i18n/locales/en/agent.json'
+import enSettings from '@/i18n/locales/en/settings.json'
 
 // ─── Turkish ─────────────────────────────────────────────────────────────────
-import trCommon from './locales/tr/common.json'
-import trEditor from './locales/tr/editor.json'
-import trAgent from './locales/tr/agent.json'
-import trSettings from './locales/tr/settings.json'
+import trCommon from '@/i18n/locales/tr/common.json'
+import trEditor from '@/i18n/locales/tr/editor.json'
+import trAgent from '@/i18n/locales/tr/agent.json'
+import trSettings from '@/i18n/locales/tr/settings.json'
 
 i18n
   .use(LanguageDetector)

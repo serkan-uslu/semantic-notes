@@ -1,4 +1,4 @@
-import { Badge } from '../../atoms/Badge/Badge.js'
+import { Badge } from '@/components/atoms/Badge/Badge.js'
 import { useTranslation } from 'react-i18next'
 import type { AgentRunStatus } from '@semantic-notes/shared'
 

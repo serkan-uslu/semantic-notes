@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { settingsRepository } from '../repositories/settingsRepository.js'
+import { settingsRepository } from '~/repositories/settingsRepository.js'
 import { UpdateSettingsSchema } from '@semantic-notes/shared'
 
 export const settingsRouter = Router()

@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import i18n from '../i18n/index.js'
+import i18n from '@/i18n/index.js'
 
 type Theme = 'light' | 'dark' | 'system'
 type Language = 'en' | 'tr'

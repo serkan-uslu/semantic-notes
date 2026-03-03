@@ -1,3 +1,3 @@
 // Re-export split hooks for backward compatibility
-export { useAgentList } from './useAgentList.js'
-export { useAgentRun } from './useAgentRun.js'
+export { useAgentList } from '@/hooks/useAgentList.js'
+export { useAgentRun } from '@/hooks/useAgentRun.js'

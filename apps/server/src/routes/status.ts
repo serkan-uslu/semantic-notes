@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { ollamaService } from '../ai/ollamaService.js'
-import { vectorService } from '../vector/vectorService.js'
+import { ollamaService } from '~/ai/ollamaService.js'
+import { vectorService } from '~/vector/vectorService.js'
 
 export const statusRouter = Router()
 

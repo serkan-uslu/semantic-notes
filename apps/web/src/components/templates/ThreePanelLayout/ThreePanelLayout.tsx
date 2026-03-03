@@ -1,10 +1,10 @@
 import { Suspense, lazy } from 'react'
-import { useUIStore } from '../../../stores/uiStore.js'
-import { Sidebar } from '../../organisms/Sidebar/Sidebar.js'
-import { Spinner } from '../../atoms/Spinner/Spinner.js'
+import { useUIStore } from '@/stores/uiStore.js'
+import { Sidebar } from '@/components/organisms/Sidebar/Sidebar.js'
+import { Spinner } from '@/components/atoms/Spinner/Spinner.js'
 
 const AgentPanel = lazy(() =>
-  import('../../organisms/AgentPanel/AgentPanel.js').then((m) => ({
+  import('@/components/organisms/AgentPanel/AgentPanel.js').then((m) => ({
     default: m.AgentPanel,
   }))
 )

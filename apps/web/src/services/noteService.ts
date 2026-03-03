@@ -4,7 +4,7 @@ import type {
   CreateNoteInput,
   UpdateNoteInput,
 } from '@semantic-notes/shared'
-import { apiFetch } from '../lib/apiClient'
+import { apiFetch } from '@/lib/apiClient'
 
 // ─── Note Service ─────────────────────────────────────────────────────────────
 

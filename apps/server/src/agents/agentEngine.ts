@@ -1,7 +1,7 @@
-import { agentRepository } from '../repositories/agentRepository.js'
-import { agentRunRepository } from '../repositories/agentRunRepository.js'
-import { ollamaService, type OllamaChatMessage } from '../ai/ollamaService.js'
-import { agentTools, buildToolsSchema } from './agentTools.js'
+import { agentRepository } from '~/repositories/agentRepository.js'
+import { agentRunRepository } from '~/repositories/agentRunRepository.js'
+import { ollamaService, type OllamaChatMessage } from '~/ai/ollamaService.js'
+import { agentTools, buildToolsSchema } from '~/agents/agentTools.js'
 import type { AgentRunStep, AgentToolName, RunAgentInput } from '@semantic-notes/shared'
 import { MAX_AGENT_STEPS } from '@semantic-notes/shared'
 

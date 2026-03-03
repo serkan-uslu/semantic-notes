@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Maximize2, Minimize2 } from 'lucide-react'
-import { useNoteStore } from '../../../stores/noteStore.js'
-import { BlockEditor } from '../../organisms/BlockEditor/BlockEditor.js'
+import { useNoteStore } from '@/stores/noteStore.js'
+import { BlockEditor } from '@/components/organisms/BlockEditor/BlockEditor.js'
 
 export function NotePage() {
   const { activeNoteId } = useNoteStore()

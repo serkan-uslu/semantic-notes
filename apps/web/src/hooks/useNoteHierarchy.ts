@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react'
-import { useNoteStore } from '../stores/noteStore.js'
+import { useNoteStore } from '@/stores/noteStore.js'
 import type { Note } from '@semantic-notes/shared'
 
 // ─── useNoteHierarchy ─────────────────────────────────────────────────────────

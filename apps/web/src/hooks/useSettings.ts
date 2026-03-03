@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
-import { settingsService } from '../services/settingsService.js'
-import { useUIStore } from '../stores/uiStore.js'
-import { tryCatch } from '../lib/utils.js'
+import { settingsService } from '@/services/settingsService.js'
+import { useUIStore } from '@/stores/uiStore.js'
+import { tryCatch } from '@/lib/utils.js'
 import type { AppSettings, UpdateSettingsInput } from '@semantic-notes/shared'
 import toast from 'react-hot-toast'
 

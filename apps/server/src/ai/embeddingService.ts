@@ -1,11 +1,11 @@
 import { nanoid } from 'nanoid'
 import { eq } from 'drizzle-orm'
-import { db } from '../db/index.js'
-import { embeddings } from '../db/schema.js'
-import { noteRepository } from '../repositories/noteRepository.js'
-import { settingsRepository } from '../repositories/settingsRepository.js'
-import { ollamaService } from '../ai/ollamaService.js'
-import { vectorService } from '../vector/vectorService.js'
+import { db } from '~/db/index.js'
+import { embeddings } from '~/db/schema.js'
+import { noteRepository } from '~/repositories/noteRepository.js'
+import { settingsRepository } from '~/repositories/settingsRepository.js'
+import { ollamaService } from '~/ai/ollamaService.js'
+import { vectorService } from '~/vector/vectorService.js'
 import type { Block } from '@semantic-notes/shared'
 
 // ─── Text Extraction ──────────────────────────────────────────────────────────

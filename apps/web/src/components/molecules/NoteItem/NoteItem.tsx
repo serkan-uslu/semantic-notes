@@ -8,9 +8,9 @@ import {
   MoreHorizontal,
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { cn } from '../../../lib/utils.js'
-import { useNoteHierarchy } from '../../../hooks/useNoteHierarchy.js'
-import { ConfirmDialog } from '../ConfirmDialog/ConfirmDialog.js'
+import { cn } from '@/lib/utils.js'
+import { useNoteHierarchy } from '@/hooks/useNoteHierarchy.js'
+import { ConfirmDialog } from '@/components/molecules/ConfirmDialog/ConfirmDialog.js'
 import type { Note } from '@semantic-notes/shared'
 
 // ─── NoteItem ─────────────────────────────────────────────────────────────────

@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { agentRepository } from '../repositories/agentRepository.js'
-import { agentRunRepository } from '../repositories/agentRunRepository.js'
-import { agentEngine } from '../agents/agentEngine.js'
+import { agentRepository } from '~/repositories/agentRepository.js'
+import { agentRunRepository } from '~/repositories/agentRunRepository.js'
+import { agentEngine } from '~/agents/agentEngine.js'
 import {
   CreateAgentSchema,
   UpdateAgentSchema,

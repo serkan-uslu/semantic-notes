@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { statusService } from '../services/statusService.js'
+import { statusService } from '@/services/statusService.js'
 
 type StatusState = {
   ollama: { online: boolean; models: string[] }

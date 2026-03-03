@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm'
 import { nanoid } from 'nanoid'
-import { db } from '../db/index.js'
-import { agents, agent_runs, agent_tool_calls } from '../db/schema.js'
+import { db } from '~/db/index.js'
+import { agents, agent_runs, agent_tool_calls } from '~/db/schema.js'
 import type {
   Agent,
   CreateAgentInput,
@@ -100,4 +100,4 @@ export const agentRepository = {
 
 // ─── Agent Run Repository ─────────────────────────────────────────────────────
 // Moved to agentRunRepository.ts — re-exported for backward compatibility.
-export { agentRunRepository } from './agentRunRepository.js'
+export { agentRunRepository } from '~/repositories/agentRunRepository.js'

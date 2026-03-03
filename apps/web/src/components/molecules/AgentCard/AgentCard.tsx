@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Bot, Play, Clock, Pencil, Trash2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Button } from '../../atoms/Button/Button.js'
-import { Spinner } from '../../atoms/Spinner/Spinner.js'
-import { AgentRunItem } from '../AgentRunItem/AgentRunItem.js'
-import { ConfirmDialog } from '../ConfirmDialog/ConfirmDialog.js'
-import { useAgentRun } from '../../../hooks/useAgentRun.js'
-import { useNoteStore } from '../../../stores/noteStore.js'
+import { Button } from '@/components/atoms/Button/Button.js'
+import { Spinner } from '@/components/atoms/Spinner/Spinner.js'
+import { AgentRunItem } from '@/components/molecules/AgentRunItem/AgentRunItem.js'
+import { ConfirmDialog } from '@/components/molecules/ConfirmDialog/ConfirmDialog.js'
+import { useAgentRun } from '@/hooks/useAgentRun.js'
+import { useNoteStore } from '@/stores/noteStore.js'
 import type { Agent, AgentRun } from '@semantic-notes/shared'
 
 // ─── AgentCard ────────────────────────────────────────────────────────────────

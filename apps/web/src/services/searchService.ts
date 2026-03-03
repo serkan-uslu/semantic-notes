@@ -1,4 +1,4 @@
-import { apiFetch } from '../lib/apiClient'
+import { apiFetch } from '@/lib/apiClient'
 import type { SearchResult, SearchQuery } from '@semantic-notes/shared'
 
 // ─── Search Service ───────────────────────────────────────────────────────────

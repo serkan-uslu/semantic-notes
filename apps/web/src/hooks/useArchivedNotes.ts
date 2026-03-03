@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
-import { noteService } from '../services/noteService.js'
-import { tryCatch } from '../lib/utils.js'
-import { useNoteStore } from '../stores/noteStore.js'
+import { noteService } from '@/services/noteService.js'
+import { tryCatch } from '@/lib/utils.js'
+import { useNoteStore } from '@/stores/noteStore.js'
 import type { Note } from '@semantic-notes/shared'
 
 // ─── useArchivedNotes ─────────────────────────────────────────────────────────

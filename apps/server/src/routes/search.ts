@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { embeddingService } from '../ai/embeddingService.js'
-import { hybridSearch } from '../services/searchService.js'
+import { embeddingService } from '~/ai/embeddingService.js'
+import { hybridSearch } from '~/services/searchService.js'
 
 export const searchRouter = Router()
 

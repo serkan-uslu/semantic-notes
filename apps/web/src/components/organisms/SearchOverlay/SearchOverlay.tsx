@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { Search, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { useUIStore } from '../../../stores/uiStore.js'
-import { useNoteStore } from '../../../stores/noteStore.js'
-import { useSemantic } from '../../../hooks/useSemantic.js'
-import { Badge } from '../../atoms/Badge/Badge.js'
-import { Spinner } from '../../atoms/Spinner/Spinner.js'
-import { cn } from '../../../lib/utils.js'
+import { useUIStore } from '@/stores/uiStore.js'
+import { useNoteStore } from '@/stores/noteStore.js'
+import { useSemantic } from '@/hooks/useSemantic.js'
+import { Badge } from '@/components/atoms/Badge/Badge.js'
+import { Spinner } from '@/components/atoms/Spinner/Spinner.js'
+import { cn } from '@/lib/utils.js'
 
 export function SearchOverlay() {
   const { t } = useTranslation('common')

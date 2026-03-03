@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useNoteStore } from '../stores/noteStore.js'
-import { noteService } from '../services/noteService.js'
-import { tryCatch } from '../lib/utils.js'
+import { useNoteStore } from '@/stores/noteStore.js'
+import { noteService } from '@/services/noteService.js'
+import { tryCatch } from '@/lib/utils.js'
 import toast from 'react-hot-toast'
 
 // ─── useNoteList ──────────────────────────────────────────────────────────────

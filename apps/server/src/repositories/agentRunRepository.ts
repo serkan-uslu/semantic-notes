@@ -1,7 +1,7 @@
 import { eq, desc } from 'drizzle-orm'
 import { nanoid } from 'nanoid'
-import { db } from '../db/index.js'
-import { agent_runs, agent_tool_calls } from '../db/schema.js'
+import { db } from '~/db/index.js'
+import { agent_runs, agent_tool_calls } from '~/db/schema.js'
 import type {
   AgentRun,
   AgentRunStep,

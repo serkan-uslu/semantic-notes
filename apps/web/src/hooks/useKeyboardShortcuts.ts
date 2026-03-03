@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { useUIStore } from '../stores/uiStore.js'
-import { useNoteStore } from '../stores/noteStore.js'
-import { useNoteList } from './useNote.js'
+import { useUIStore } from '@/stores/uiStore.js'
+import { useNoteStore } from '@/stores/noteStore.js'
+import { useNoteList } from '@/hooks/useNote.js'
 
 // ─── useKeyboardShortcuts ─────────────────────────────────────────────────────
 

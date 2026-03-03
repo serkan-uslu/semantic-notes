@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { Search, FileText, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { cn } from '../../../lib/utils.js'
-import { useUIStore } from '../../../stores/uiStore.js'
-import { useNoteStore } from '../../../stores/noteStore.js'
-import { useNoteList } from '../../../hooks/useNote.js'
+import { cn } from '@/lib/utils.js'
+import { useUIStore } from '@/stores/uiStore.js'
+import { useNoteStore } from '@/stores/noteStore.js'
+import { useNoteList } from '@/hooks/useNote.js'
 import type { Note } from '@semantic-notes/shared'
 
 // ─── CommandPalette ───────────────────────────────────────────────────────────

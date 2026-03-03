@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
-import { useNoteStore } from '../stores/noteStore.js'
-import { noteService } from '../services/noteService.js'
-import { tryCatch, debounce } from '../lib/utils.js'
-import { DEBOUNCE_SAVE_MS } from '../lib/constants.js'
+import { useNoteStore } from '@/stores/noteStore.js'
+import { noteService } from '@/services/noteService.js'
+import { tryCatch, debounce } from '@/lib/utils.js'
+import { DEBOUNCE_SAVE_MS } from '@/lib/constants.js'
 import toast from 'react-hot-toast'
 import type { NoteWithBlocks, UpdateNoteInput } from '@semantic-notes/shared'
 
 // Re-export co-located note hooks for backward compatibility
-export { useNoteList } from './useNoteList.js'
-export { useNoteHierarchy } from './useNoteHierarchy.js'
-export { useArchivedNotes } from './useArchivedNotes.js'
+export { useNoteList } from '@/hooks/useNoteList.js'
+export { useNoteHierarchy } from '@/hooks/useNoteHierarchy.js'
+export { useArchivedNotes } from '@/hooks/useArchivedNotes.js'
 
 // ─── useNote ─────────────────────────────────────────────────────────────────────────
 

@@ -6,6 +6,6 @@
  * Run this script when you want to apply migrations without starting the server,
  * or to verify the DB is up to date after pulling new changes.
  */
-import { runMigrations } from './index.js'
+import { runMigrations } from '~/db/index.js'
 
 runMigrations()

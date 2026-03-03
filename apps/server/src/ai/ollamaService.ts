@@ -1,4 +1,4 @@
-import { settingsRepository } from '../repositories/settingsRepository.js'
+import { settingsRepository } from '~/repositories/settingsRepository.js'
 import type { AppSettings } from '@semantic-notes/shared'
 
 // ─── Settings Cache ────────────────────────────────────────────────────────────────

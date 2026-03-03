@@ -1,4 +1,4 @@
-import { cn } from '../../../lib/utils.js'
+import { cn } from '@/lib/utils.js'
 
 type BadgeVariant = 'default' | 'success' | 'error' | 'warning' | 'ai'
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useAgentStore } from '../stores/agentStore.js'
-import { agentService } from '../services/agentService.js'
-import { tryCatch } from '../lib/utils.js'
+import { useAgentStore } from '@/stores/agentStore.js'
+import { agentService } from '@/services/agentService.js'
+import { tryCatch } from '@/lib/utils.js'
 import toast from 'react-hot-toast'
 import type { Agent, CreateAgentInput, UpdateAgentInput } from '@semantic-notes/shared'
 

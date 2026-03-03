@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
-import { searchService } from '../services/searchService.js'
-import { tryCatch, debounce } from '../lib/utils.js'
+import { searchService } from '@/services/searchService.js'
+import { tryCatch, debounce } from '@/lib/utils.js'
 import type { SearchResult } from '@semantic-notes/shared'
 
 // ─── useSemantic ──────────────────────────────────────────────────────────────

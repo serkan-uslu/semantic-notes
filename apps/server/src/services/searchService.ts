@@ -1,5 +1,5 @@
-import { embeddingService } from '../ai/embeddingService.js'
-import { noteRepository } from '../repositories/noteRepository.js'
+import { embeddingService } from '~/ai/embeddingService.js'
+import { noteRepository } from '~/repositories/noteRepository.js'
 import type { SearchResult } from '@semantic-notes/shared'
 
 // ─── Hybrid Search Service ────────────────────────────────────────────────────

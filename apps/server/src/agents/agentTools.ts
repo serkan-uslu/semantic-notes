@@ -1,9 +1,9 @@
 import { z } from 'zod'
 import { nanoid } from 'nanoid'
 import { zodToJsonSchema } from 'zod-to-json-schema'
-import { noteRepository } from '../repositories/noteRepository.js'
-import { embeddingService } from '../ai/embeddingService.js'
-import { settingsRepository } from '../repositories/settingsRepository.js'
+import { noteRepository } from '~/repositories/noteRepository.js'
+import { embeddingService } from '~/ai/embeddingService.js'
+import { settingsRepository } from '~/repositories/settingsRepository.js'
 import type {
   AgentToolName,
   Block,

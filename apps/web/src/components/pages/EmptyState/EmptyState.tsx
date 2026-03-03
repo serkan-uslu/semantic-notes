@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { FileText, Command } from 'lucide-react'
-import { Button } from '../../atoms/Button/Button.js'
-import { useNoteList } from '../../../hooks/useNote.js'
-import { useUIStore } from '../../../stores/uiStore.js'
+import { Button } from '@/components/atoms/Button/Button.js'
+import { useNoteList } from '@/hooks/useNote.js'
+import { useUIStore } from '@/stores/uiStore.js'
 
 export function EmptyState() {
   const { t } = useTranslation('common')

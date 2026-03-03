@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import { Button } from '../../atoms/Button/Button.js'
+import { Button } from '@/components/atoms/Button/Button.js'
 
 // ─── ConfirmDialog ────────────────────────────────────────────────────────────
 

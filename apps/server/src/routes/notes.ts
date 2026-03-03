@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { z } from 'zod'
-import { noteRepository } from '../repositories/noteRepository.js'
-import { embeddingService } from '../ai/embeddingService.js'
+import { noteRepository } from '~/repositories/noteRepository.js'
+import { embeddingService } from '~/ai/embeddingService.js'
 import { CreateNoteSchema, UpdateNoteSchema, ReorderNoteSchema } from '@semantic-notes/shared'
 import type { UpdateNoteInput } from '@semantic-notes/shared'
 

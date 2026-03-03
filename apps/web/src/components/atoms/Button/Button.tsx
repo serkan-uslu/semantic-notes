@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { cn } from '../../../lib/utils.js'
+import { cn } from '@/lib/utils.js'
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
 type ButtonSize = 'sm' | 'default' | 'lg'
