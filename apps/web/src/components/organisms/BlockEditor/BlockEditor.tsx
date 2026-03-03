@@ -12,42 +12,37 @@ import type { Block } from '@semantic-notes/shared'
 // ─── Block conversion helpers ─────────────────────────────────────────────────
 
 /**
- * Convert BlockNote's internal block format to our own format for storage.
- * We store the full BlockNote JSON so we can restore it perfectly.
+ * Restore blocks from DB to BlockNote's native format.
+ * Handles two storage formats:
+ *  - Legacy hack: { type: 'paragraph', content: <BlockNote block> }
+ *  - Current:     native BlockNote block stored directly
  */
-function blocknoteToStoredBlocks(blocks: unknown[]): Block[] {
-  return blocks.map((b) => {
-    const block = b as Record<string, unknown>
-    return {
-      type: 'paragraph', // placeholder type for discriminated union
-      content: block, // store full BlockNote block as content
-    } as unknown as Block
-  })
-}
-
-/**
- * Convert our stored blocks back to BlockNote format.
- */
-function storedToBlocknoteBlocks(blocks: Block[]): unknown[] {
+function toBlocknoteBlocks(blocks: Block[]): unknown[] {
   if (!blocks || blocks.length === 0) return []
-  return blocks.map((b) => {
-    // If the block was stored as BlockNote format
-    if (b.content && typeof b.content === 'object' && 'id' in (b.content as object)) {
-      return b.content
+  return blocks.map((b: unknown) => {
+    const block = b as Record<string, unknown>
+
+    // Legacy format: content field holds the actual BlockNote block (has an 'id')
+    if (block.content && typeof block.content === 'object' && 'id' in (block.content as object)) {
+      return block.content
     }
-    // Otherwise create a simple paragraph block
+
+    // Current format: block itself is a native BlockNote block
+    if ('id' in block) {
+      return block
+    }
+
+    // Agent-created block (custom format, no id): render as plain text paragraph
+    const text = Array.isArray(block.content)
+      ? (block.content as { text?: string }[]).map((c) => c.text ?? '').join('')
+      : typeof block.content === 'string'
+        ? block.content
+        : ''
     return {
       type: 'paragraph',
-      content: [
-        {
-          type: 'text',
-          text:
-            typeof b.content === 'string'
-              ? b.content
-              : '',
-          styles: {},
-        },
-      ],
+      props: { textColor: 'default', backgroundColor: 'default', textAlignment: 'left' },
+      content: text ? [{ type: 'text', text, styles: {} }] : [],
+      children: [],
     }
   })
 }
@@ -110,9 +105,8 @@ export function BlockEditor({ noteId, isWide = false }: BlockEditorProps) {
     setTitleValue(note.title)
 
     if (note.blocks && note.blocks.length > 0) {
-      const bnBlocks = storedToBlocknoteBlocks(note.blocks)
+      const bnBlocks = toBlocknoteBlocks(note.blocks)
       if (bnBlocks.length > 0) {
-        // Replace editor content
         editor.replaceBlocks(editor.document, bnBlocks as Parameters<typeof editor.replaceBlocks>[1])
       }
     }
@@ -132,8 +126,8 @@ export function BlockEditor({ noteId, isWide = false }: BlockEditorProps) {
   }
 
   const handleEditorChange = () => {
-    const blocks = blocknoteToStoredBlocks(editor.document as unknown[])
-    debouncedSave({ title: titleRef.current, blocks })
+    // Store BlockNote native blocks directly — no wrapping needed
+    debouncedSave({ title: titleRef.current, blocks: editor.document as unknown as Block[] })
   }
 
   if (isLoading) {

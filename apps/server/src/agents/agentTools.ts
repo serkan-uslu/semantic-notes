@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { nanoid } from 'nanoid'
 import { zodToJsonSchema } from 'zod-to-json-schema'
 import { noteRepository } from '../repositories/noteRepository.js'
 import { embeddingService } from '../ai/embeddingService.js'
@@ -10,26 +11,38 @@ import type {
   UpdateNoteInput,
 } from '@semantic-notes/shared'
 
+// ─── BlockNote native block factory ──────────────────────────────────────────
+
+function makeParagraph(text: string): Block {
+  return {
+    id: nanoid(),
+    type: 'paragraph',
+    props: { textColor: 'default', backgroundColor: 'default', textAlignment: 'left' },
+    content: [{ type: 'text', text, styles: {} }],
+    children: [],
+  } as unknown as Block
+}
+
 // ─── Block text extraction ────────────────────────────────────────────────────
-// Blocks are stored in a wrapped format: { type: 'paragraph', content: <BlockNote block> }
-// This helper extracts the plain text so the LLM can read it.
+// Blocks may be stored as BlockNote native JSON or legacy wrapped format.
+// This helper extracts plain text so the LLM can read them.
 
 function blockToText(block: unknown): string {
   if (!block || typeof block !== 'object') return ''
   const b = block as Record<string, unknown>
   const content = b.content
 
-  // Plain string content
+  // Plain string content (e.g. code blocks)
   if (typeof content === 'string') return content
 
-  // InlineContent array: [{ text: '...', type: 'text' }]
+  // BlockNote native / InlineContent array: [{ type: 'text', text: '...' }]
   if (Array.isArray(content)) {
     return content
       .map((c: unknown) => (typeof c === 'object' && c !== null && 'text' in c ? (c as { text: string }).text : ''))
       .join('')
   }
 
-  // BlockNote native block wrapped in content field: { id, type, content: [...], children: [] }
+  // Legacy hack format: content field holds a BlockNote block { id, type, content: [...] }
   if (typeof content === 'object' && content !== null) {
     const inner = (content as Record<string, unknown>).content
     if (Array.isArray(inner)) {
@@ -260,12 +273,7 @@ export const agentTools: Record<AgentToolName, AgentTool> = {
         .safeParse(input)
       if (!parsed.success) return { success: false, error: 'Invalid input' }
 
-      const summaryBlock: Block = {
-        type: 'callout',
-        content: [{ type: 'text', text: parsed.data.summary_text }],
-        icon: '📝',
-        color: '#6E56CF',
-      }
+      const summaryBlock = makeParagraph(`📝 Summary: ${parsed.data.summary_text}`)
       noteRepository.appendBlocks(parsed.data.note_id, [summaryBlock])
       embeddingService.embedNote(parsed.data.note_id).catch(console.error)
 
@@ -327,17 +335,7 @@ export const agentTools: Record<AgentToolName, AgentTool> = {
         return { success: true, data: { linked: 0 } }
       }
 
-      const relatedBlock: Block = {
-        type: 'callout',
-        content: [
-          {
-            type: 'text',
-            text: '🔗 Related: ' + filtered.map((r) => r.title).join(', '),
-          },
-        ],
-        icon: '🔗',
-      }
-
+      const relatedBlock = makeParagraph(`🔗 Related: ${filtered.map((r) => r.title).join(', ')}`)
       noteRepository.appendBlocks(parsed.data.note_id, [relatedBlock])
       return { success: true, data: { linked: filtered.length } }
     },

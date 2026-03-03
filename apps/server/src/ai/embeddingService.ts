@@ -17,11 +17,11 @@ function extractTextFromBlock(block: Block): string {
   if (typeof block.content === 'string') return block.content
 
   if (Array.isArray(block.content)) {
-    // InlineContent array: [{ text: '...', type: 'text' }]
+    // BlockNote native / InlineContent array: [{ type: 'text', text: '...' }]
     return (block.content as { text?: string }[]).map((c) => c.text ?? '').join('')
   }
 
-  // BlockNote native block wrapped in content field: { id, type, content: [...] }
+  // Legacy hack: content field holds a BlockNote block { id, type, content: [...] }
   if (typeof block.content === 'object') {
     const inner = (block.content as Record<string, unknown>).content
     if (Array.isArray(inner)) {
