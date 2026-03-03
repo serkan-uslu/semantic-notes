@@ -1,0 +1,65 @@
+{
+  "panel": {
+    "title": "Ajanlar",
+    "empty": "Henüz ajan yok",
+    "create": "Ajan oluştur"
+  },
+  "run": {
+    "start": "Çalıştır",
+    "running": "Çalışıyor...",
+    "status": {
+      "running": "Çalışıyor",
+      "success": "Tamamlandı",
+      "error": "Başarısız",
+      "cancelled": "İptal edildi"
+    },
+    "steps": "Adımlar",
+    "output": "Çıktı",
+    "noOutput": "Henüz çıktı yok",
+    "viewRun": "Çalıştırma detaylarını gör",
+    "history": "Çalıştırma geçmişi"
+  },
+  "tools": {
+    "read_note": "Notu oku",
+    "search_notes": "Not ara",
+    "list_notes": "Notları listele",
+    "create_note": "Not oluştur",
+    "update_note": "Notu güncelle",
+    "append_blocks": "Blok ekle",
+    "delete_blocks": "Blok sil",
+    "search_semantic": "Semantik arama",
+    "get_settings": "Ayarları al",
+    "summarize_note": "Notu özetle",
+    "tag_note": "Notu etiketle",
+    "link_related": "İlgili notları bağla"
+  },
+  "trigger": {
+    "manual": "Manuel",
+    "on_save": "Kayıt sonrası",
+    "on_select": "Seçim sonrası",
+    "scheduled": "Zamanlanmış"
+  },
+  "form": {
+    "createTitle": "Ajan oluştur",
+    "editTitle": "Ajanı düzenle",
+    "name": "Ad",
+    "namePlaceholder": "Ajanım",
+    "description": "Açıklama",
+    "descriptionPlaceholder": "Bu ajan ne yapar?",
+    "systemPrompt": "Sistem prompt",
+    "systemPromptPlaceholder": "Sen yardımsever bir asistansın...",
+    "model": "Model",
+    "tools": "Araçlar",
+    "trigger": "Tetikleyici",
+    "schedule": "Zamanlama (cron)",
+    "active": "Aktif",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "create": "Oluştur"
+  },
+  "diff": {
+    "title": "Değişiklikleri incele",
+    "accept": "Değişiklikleri kabul et",
+    "reject": "Değişiklikleri reddet"
+  }
+}

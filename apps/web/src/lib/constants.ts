@@ -1,0 +1,9 @@
+export const DEBOUNCE_SAVE_MS = 800
+export const MAX_BLOCK_DEPTH = 3
+export const MAX_AGENT_STEPS = 15
+export const DEFAULT_SEARCH_LIMIT = 10
+export const SIDEBAR_WIDTH = 240
+export const AGENT_PANEL_WIDTH = 280
+export const EDITOR_MAX_WIDTH_NORMAL = 720
+export const EDITOR_MAX_WIDTH_WIDE = 960
+export const AGENT_POLL_INTERVAL_MS = 1500

@@ -1,0 +1,52 @@
+{
+  "blocks": {
+    "paragraph": "Paragraf",
+    "heading1": "Başlık 1",
+    "heading2": "Başlık 2",
+    "heading3": "Başlık 3",
+    "bulletList": "Madde listesi",
+    "numberedList": "Numaralı liste",
+    "checkList": "Yapılacaklar",
+    "code": "Kod",
+    "callout": "Açıklama kutusu",
+    "divider": "Ayırıcı",
+    "image": "Görsel",
+    "table": "Tablo",
+    "toggle": "Açılır/Kapanır",
+    "quote": "Alıntı"
+  },
+  "slash": {
+    "placeholder": "Block tipi ara...",
+    "basic": "Temel bloklar",
+    "media": "Medya",
+    "advanced": "Gelişmiş"
+  },
+  "toolbar": {
+    "bold": "Kalın",
+    "italic": "İtalik",
+    "underline": "Altı çizili",
+    "strikethrough": "Üzeri çizili",
+    "code": "Satır içi kod",
+    "link": "Bağlantı",
+    "color": "Renk",
+    "aiAction": "AI Aksiyonu"
+  },
+  "placeholder": {
+    "title": "Başlıksız",
+    "block": "Komutlar için '/' yazın"
+  },
+  "cover": {
+    "add": "Kapak ekle",
+    "change": "Kapağı değiştir",
+    "remove": "Kapağı kaldır"
+  },
+  "icon": {
+    "add": "Simge ekle",
+    "change": "Simgeyi değiştir",
+    "remove": "Simgeyi kaldır"
+  },
+  "width": {
+    "normal": "Normal genişlik",
+    "wide": "Geniş"
+  }
+}

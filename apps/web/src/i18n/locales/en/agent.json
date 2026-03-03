@@ -1,0 +1,65 @@
+{
+  "panel": {
+    "title": "Agents",
+    "empty": "No agents yet",
+    "create": "Create agent"
+  },
+  "run": {
+    "start": "Run",
+    "running": "Running...",
+    "status": {
+      "running": "Running",
+      "success": "Completed",
+      "error": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "steps": "Steps",
+    "output": "Output",
+    "noOutput": "No output yet",
+    "viewRun": "View run details",
+    "history": "Run history"
+  },
+  "tools": {
+    "read_note": "Read note",
+    "search_notes": "Search notes",
+    "list_notes": "List notes",
+    "create_note": "Create note",
+    "update_note": "Update note",
+    "append_blocks": "Append blocks",
+    "delete_blocks": "Delete blocks",
+    "search_semantic": "Semantic search",
+    "get_settings": "Get settings",
+    "summarize_note": "Summarize note",
+    "tag_note": "Tag note",
+    "link_related": "Link related"
+  },
+  "trigger": {
+    "manual": "Manual",
+    "on_save": "On save",
+    "on_select": "On selection",
+    "scheduled": "Scheduled"
+  },
+  "form": {
+    "createTitle": "Create agent",
+    "editTitle": "Edit agent",
+    "name": "Name",
+    "namePlaceholder": "My agent",
+    "description": "Description",
+    "descriptionPlaceholder": "What does this agent do?",
+    "systemPrompt": "System prompt",
+    "systemPromptPlaceholder": "You are a helpful assistant...",
+    "model": "Model",
+    "tools": "Tools",
+    "trigger": "Trigger",
+    "schedule": "Schedule (cron)",
+    "active": "Active",
+    "cancel": "Cancel",
+    "save": "Save",
+    "create": "Create"
+  },
+  "diff": {
+    "title": "Review changes",
+    "accept": "Accept changes",
+    "reject": "Reject changes"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "app": {
+    "name": "SemanticNotes",
+    "tagline": "Yerel AI destekli bilgi tabanın"
+  },
+  "actions": {
+    "save": "Kaydet",
+    "saveChanges": "Değişiklikleri kaydet",
+    "discard": "Vazgeç",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "confirm": "Onayla",
+    "accept": "Kabul Et",
+    "reject": "Reddet",
+    "retry": "Tekrar Dene",
+    "markAllRead": "Tümünü oku",
+    "create": "Oluştur",
+    "edit": "Düzenle",
+    "rename": "Yeniden Adlandır",
+    "duplicate": "Kopyala",
+    "archive": "Arşivle",
+    "restore": "Geri Yükle",
+    "run": "Çalıştır",
+    "newPage": "Yeni sayfa"
+  },
+  "nav": {
+    "newPage": "Yeni sayfa",
+    "trash": "Çöp kutusu",
+    "settings": "Ayarlar",
+    "search": "Ara",
+    "agents": "Ajanlar"
+  },
+  "notifications": {
+    "agentDone": "{{agentName}} tamamlandı",
+    "agentFailed": "{{agentName}} başarısız oldu",
+    "agentRunning": "Adım {{current}}/{{total}}",
+    "noNotifications": "Bildirim yok",
+    "noteSaved": "Kaydedildi",
+    "error": "Bir şeyler ters gitti"
+  },
+  "time": {
+    "justNow": "Az önce",
+    "minutesAgo": "{{count}} dk önce",
+    "hoursAgo": "{{count}} sa önce",
+    "daysAgo": "{{count}} gün önce"
+  },
+  "states": {
+    "loading": "Yükleniyor...",
+    "empty": "Henüz hiçbir şey yok",
+    "error": "Yüklenemedi"
+  },
+  "emptyState": {
+    "title": "Henüz not yok",
+    "description": "İlk notunu oluştur ve bilgi tabanını oluşturmaya başla.",
+    "cmdKHint": "Komut paletini aç"
+  },
+  "note": {
+    "untitled": "Adsız",
+    "deleteTitle": "\"{{title}}\" silinsin mi?",
+    "deleteDescription": "Bu işlem geri alınamaz. Not kalıcı olarak silinecek."
+  }
+}

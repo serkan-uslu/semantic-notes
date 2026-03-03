@@ -1,0 +1,30 @@
+{
+  "title": "Ayarlar",
+  "sections": {
+    "ai": "AI & Modeller",
+    "appearance": "Görünüm",
+    "data": "Veri",
+    "agents": "Ajanlar"
+  },
+  "ai": {
+    "ollamaHost": "Ollama adresi",
+    "ollamaHostHint": "Varsayılan: http://localhost:11434",
+    "ollamaStatus": "Ollama durumu",
+    "ollamaOnline": "Çevrimiçi",
+    "ollamaOffline": "Çevrimdışı",
+    "chatModel": "Sohbet modeli",
+    "embeddingModel": "Gömme modeli",
+    "autoEmbed": "Kayıt sonrası otomatik göm"
+  },
+  "appearance": {
+    "theme": "Tema",
+    "themeLight": "Açık",
+    "themeDark": "Koyu",
+    "themeSystem": "Sistem",
+    "language": "Dil"
+  },
+  "data": {
+    "dataDir": "Veri klasörü",
+    "dataDirHint": "notes.db ve ChromaDB'nin saklandığı yer"
+  }
+}

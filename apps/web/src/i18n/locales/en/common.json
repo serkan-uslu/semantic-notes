@@ -1,0 +1,62 @@
+{
+  "app": {
+    "name": "SemanticNotes",
+    "tagline": "Your local AI-powered knowledge base"
+  },
+  "actions": {
+    "save": "Save",
+    "saveChanges": "Save changes",
+    "discard": "Discard",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "accept": "Accept",
+    "reject": "Reject",
+    "retry": "Retry Again",
+    "markAllRead": "Mark all as read",
+    "create": "Create",
+    "edit": "Edit",
+    "rename": "Rename",
+    "duplicate": "Duplicate",
+    "archive": "Archive",
+    "restore": "Restore",
+    "run": "Run",
+    "newPage": "New page"
+  },
+  "nav": {
+    "newPage": "New page",
+    "trash": "Trash",
+    "settings": "Settings",
+    "search": "Search",
+    "agents": "Agents"
+  },
+  "notifications": {
+    "agentDone": "{{agentName}} completed",
+    "agentFailed": "{{agentName}} failed",
+    "agentRunning": "Step {{current}}/{{total}}",
+    "noNotifications": "No notifications",
+    "noteSaved": "Saved",
+    "error": "Something went wrong"
+  },
+  "time": {
+    "justNow": "Just now",
+    "minutesAgo": "{{count}} min ago",
+    "hoursAgo": "{{count}} hr ago",
+    "daysAgo": "{{count}} days ago"
+  },
+  "states": {
+    "loading": "Loading...",
+    "empty": "Nothing here yet",
+    "error": "Failed to load"
+  },
+  "emptyState": {
+    "title": "No notes yet",
+    "description": "Create your first note and start building your knowledge base.",
+    "cmdKHint": "Open command palette"
+  },
+  "note": {
+    "untitled": "Untitled",
+    "deleteTitle": "Delete \"{{title}}\"?",
+    "deleteDescription": "This action cannot be undone. The note will be permanently deleted."
+  }
+}

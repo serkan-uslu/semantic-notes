@@ -1,0 +1,52 @@
+{
+  "blocks": {
+    "paragraph": "Paragraph",
+    "heading1": "Heading 1",
+    "heading2": "Heading 2",
+    "heading3": "Heading 3",
+    "bulletList": "Bulleted list",
+    "numberedList": "Numbered list",
+    "checkList": "Todo list",
+    "code": "Code",
+    "callout": "Callout",
+    "divider": "Divider",
+    "image": "Image",
+    "table": "Table",
+    "toggle": "Toggle",
+    "quote": "Quote"
+  },
+  "slash": {
+    "placeholder": "Search for a block type...",
+    "basic": "Basic blocks",
+    "media": "Media",
+    "advanced": "Advanced"
+  },
+  "toolbar": {
+    "bold": "Bold",
+    "italic": "Italic",
+    "underline": "Underline",
+    "strikethrough": "Strikethrough",
+    "code": "Inline code",
+    "link": "Link",
+    "color": "Color",
+    "aiAction": "AI Action"
+  },
+  "placeholder": {
+    "title": "Untitled",
+    "block": "Type '/' for commands"
+  },
+  "cover": {
+    "add": "Add cover",
+    "change": "Change cover",
+    "remove": "Remove cover"
+  },
+  "icon": {
+    "add": "Add icon",
+    "change": "Change icon",
+    "remove": "Remove icon"
+  },
+  "width": {
+    "normal": "Normal width",
+    "wide": "Wide"
+  }
+}
