@@ -31,3 +31,12 @@ searchRouter.post('/rebuild-fts', (_req, res) => {
   const count = noteRepository.rebuildAllFts()
   return res.json({ ok: true, data: { indexed: count } })
 })
+
+// POST /api/search/embed-all — queue embedding for all notes
+searchRouter.post('/embed-all', async (_req, res) => {
+  const notes = noteRepository.findAll()
+  for (const note of notes) {
+    embeddingService.embedNote(note.id).catch(console.error)
+  }
+  return res.json({ ok: true, data: { queued: notes.length } })
+})

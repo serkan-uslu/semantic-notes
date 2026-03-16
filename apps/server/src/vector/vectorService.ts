@@ -1,8 +1,7 @@
-import { ChromaClient, Collection } from 'chromadb'
+import { ChromaClient, type Collection } from 'chromadb'
 
 // ─── ChromaDB Client ──────────────────────────────────────────────────────────
 
-const CHROMA_URL = 'http://localhost:8000'
 const COLLECTION_NAME = 'semantic_notes'
 
 let client: ChromaClient | null = null
@@ -10,13 +9,16 @@ let collection: Collection | null = null
 
 async function getCollection(): Promise<Collection> {
   if (!client) {
-    client = new ChromaClient({ path: CHROMA_URL })
-    collection = null // reset when client is recreated
+    client = new ChromaClient({ host: 'localhost', port: 8000, ssl: false })
+    collection = null
   }
   if (!collection) {
+    // No embeddingFunction — we supply embeddings directly from Ollama
     collection = await client.getOrCreateCollection({
       name: COLLECTION_NAME,
-      metadata: { 'hnsw:space': 'cosine' },
+      configuration: {
+        hnsw: { space: 'cosine' },
+      },
     })
   }
   return collection
@@ -25,22 +27,16 @@ async function getCollection(): Promise<Collection> {
 // ─── Vector Store Service ─────────────────────────────────────────────────────
 
 export const vectorService = {
-  /**
-   * Check if ChromaDB is reachable via direct HTTP heartbeat.
-   * Uses /api/v2/heartbeat to avoid chromadb JS client version incompatibilities.
-   */
   async isOnline(): Promise<boolean> {
     try {
-      const res = await fetch(`${CHROMA_URL}/api/v2/heartbeat`)
-      return res.ok
+      if (!client) client = new ChromaClient({ host: 'localhost', port: 8000, ssl: false })
+      await client.heartbeat()
+      return true
     } catch {
       return false
     }
   },
 
-  /**
-   * Upsert embedding for a chunk
-   */
   async upsert(params: {
     id: string
     embedding: number[]
@@ -66,13 +62,9 @@ export const vectorService = {
     })
   },
 
-  /**
-   * Query for similar chunks
-   */
   async query(params: {
     embedding: number[]
     limit?: number
-    where?: Record<string, unknown>
   }): Promise<
     {
       id: string
@@ -87,30 +79,24 @@ export const vectorService = {
     const results = await col.query({
       queryEmbeddings: [params.embedding],
       nResults: params.limit ?? 10,
-      where: params.where as Record<string, string | number | boolean>,
+      include: ['documents', 'metadatas', 'distances'] as never,
     })
 
     return (results.ids[0] ?? []).map((id, i) => ({
       id,
-      score: 1 - (results.distances?.[0]?.[i] ?? 1), // cosine similarity
-      text: results.documents?.[0]?.[i] ?? '',
-      noteId: String((results.metadatas?.[0]?.[i] as Record<string, unknown>)?.note_id ?? ''),
-      blockId: String((results.metadatas?.[0]?.[i] as Record<string, unknown>)?.block_id ?? ''),
-      title: String((results.metadatas?.[0]?.[i] as Record<string, unknown>)?.title ?? ''),
+      score: 1 - (results.distances[0]?.[i] ?? 1), // cosine distance → similarity
+      text: results.documents[0]?.[i] ?? '',
+      noteId: String((results.metadatas[0]?.[i] as Record<string, unknown>)?.note_id ?? ''),
+      blockId: String((results.metadatas[0]?.[i] as Record<string, unknown>)?.block_id ?? ''),
+      title: String((results.metadatas[0]?.[i] as Record<string, unknown>)?.title ?? ''),
     }))
   },
 
-  /**
-   * Delete all embeddings related to a note
-   */
   async deleteByNoteId(noteId: string): Promise<void> {
     const col = await getCollection()
-    await col.delete({ where: { note_id: noteId } })
+    await col.delete({ where: { note_id: { $eq: noteId } } })
   },
 
-  /**
-   * Delete a specific embedding by ID
-   */
   async deleteById(id: string): Promise<void> {
     const col = await getCollection()
     await col.delete({ ids: [id] })

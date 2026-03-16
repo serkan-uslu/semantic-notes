@@ -15,7 +15,7 @@
   "dependencies": {
     "@semantic-notes/shared": "workspace:*",
     "better-sqlite3": "^12.6.2",
-    "chromadb": "^1.8.1",
+    "chromadb": "^3.3.1",
     "cors": "^2.8.5",
     "drizzle-orm": "^0.31.2",
     "express": "^4.19.2",
